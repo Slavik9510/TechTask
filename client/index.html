@@ -11,6 +11,7 @@
 <body>
     <div class="container">
         <h1>Customer List</h1>
+        <button class="btn-add" id="add-customer">Add Customer</button>
         <table id="customer-table">
             <thead>
                 <tr>
@@ -26,7 +27,40 @@
         </table>
     </div>
 
-    <script src="script.js"></script>
+    <!-- Modal -->
+    <div class="modal" id="customer-modal">
+        <div class="modal-content">
+            <div class="modal-header">Add New Customer</div>
+            <form id="customer-form">
+                <label>First Name:</label>
+                <input type="text" id="first-name" required>
+
+                <label>Last Name:</label>
+                <input type="text" id="last-name" required>
+
+                <label>Email:</label>
+                <input type="email" id="email" required>
+
+                <label>Phone Number:</label>
+                <input type="text" id="phone-number" required maxlength="15">
+
+                <label>Country:</label>
+                <input type="text" id="country">
+
+                <label>City:</label>
+                <input type="text" id="city">
+
+                <label>Street:</label>
+                <input type="text" id="street">
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="button" class="btn-cancel" id="cancel">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <script src="script.js"></script>
 </body>
 
 </html>
