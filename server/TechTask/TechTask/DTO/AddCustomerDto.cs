@@ -2,6 +2,8 @@
 
 using System.ComponentModel.DataAnnotations;
 
+// Dto for adding customer
+// Validates input data to ensure it meets required format and constraints
 public record AddCustomerDto
 {
 	[Required(ErrorMessage = "First name is required.")]
@@ -16,10 +18,11 @@ public record AddCustomerDto
 	[EmailAddress(ErrorMessage = "Invalid email address format.")]
 	public string Email { get; init; }
 
+	// Phone number validation according to the E.164 standard
 	[Required(ErrorMessage = "Phone number is required.")]
-	[RegularExpression("""^\+380\d{9}$""", ErrorMessage = "Invalid phone number format.")]
+	[RegularExpression("""^\+[1-9]\d{1,14}$""", ErrorMessage = "Invalid phone number format.")]
 	public string PhoneNumber { get; init; }
 
-	[StringLength(200, ErrorMessage = "Address cannot exceed 200 characters.")]
-	public string? Address { get; init; } // Optional
+	// Optional address details for the customer
+	public AddressDto? Address { get; init; } // Optional
 }

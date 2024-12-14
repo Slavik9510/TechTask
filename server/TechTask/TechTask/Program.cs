@@ -7,8 +7,21 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+// Adding application-specific services
 builder.Services.AddApplicationServices(builder.Configuration);
+
+// Configuring a custom exception handler
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
+builder.Services.AddCors(options =>
+{
+	options.AddDefaultPolicy(policy =>
+	{
+		policy.AllowAnyOrigin()
+			  .AllowAnyMethod()
+			  .AllowAnyHeader();
+	});
+});
 
 var app = builder.Build();
 
@@ -18,7 +31,10 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
+app.UseCors();
+
 app.MapControllers();
+
 app.UseExceptionHandler(options => { });
 
 app.Run();

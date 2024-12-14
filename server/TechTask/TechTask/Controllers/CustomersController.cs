@@ -8,7 +8,7 @@ namespace TechTask.Controllers;
 [Route("api/[controller]")]
 public class CustomersController : Controller
 {
-	private readonly ICustomersService _customersService;
+	private readonly ICustomersService _customersService; // contains business logic related to customers
 
 	public CustomersController(ICustomersService customersService)
 	{
@@ -18,6 +18,7 @@ public class CustomersController : Controller
 	[HttpPost]
 	public async Task<IActionResult> AddCustomer(AddCustomerDto customerDto)
 	{
+		// add a new customer asynchronously
 		await _customersService.AddCustomerAsync(customerDto);
 		return Ok();
 	}
@@ -25,6 +26,7 @@ public class CustomersController : Controller
 	[HttpGet]
 	public async Task<IActionResult> GetAllCustomers()
 	{
+		// retrieve all customers data asynchronously
 		var dto = await _customersService.GetAllCustomersAsync();
 		return Ok(dto);
 	}

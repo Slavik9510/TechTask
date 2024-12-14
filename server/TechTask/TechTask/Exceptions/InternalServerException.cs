@@ -1,5 +1,7 @@
 ﻿namespace TechTask.Exceptions;
 
+// Represents exception for internal server errors (HTTP 500)
+// Provides optional details for additional error context
 public class InternalServerException : Exception
 {
 	public string? Details { get; set; }

@@ -3,8 +3,10 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace TechTask.Models;
 
+// Customer entity stored in a MongoDB database
 public class Customer
 {
+	// Unique identifier for the customer(ObjectId in MongoDB)
 	[BsonId]
 	[BsonRepresentation(BsonType.ObjectId)]
 	public string Id { get; set; }
@@ -21,6 +23,7 @@ public class Customer
 	[BsonElement("phoneNumber")]
 	public string PhoneNumber { get; set; }
 
+	// Optional address details for the customer
 	[BsonElement("address")]
-	public string? Address { get; set; }
+	public Address? Address { get; set; }
 }

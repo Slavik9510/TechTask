@@ -1,19 +1,24 @@
-﻿using Microsoft.Extensions.Options;
-using MongoDB.Driver;
-using TechTask.Data.Settings;
+﻿using MongoDB.Driver;
 
 namespace TechTask.Data;
 
+// Represents the MongoDB database context, encapsulating access to the database and its collections
 public class MongoDBContext
 {
 	private readonly IMongoDatabase _database;
 
-	public MongoDBContext(IOptions<MongoDBSettings> settings)
+	public MongoDBContext(IConfiguration config)
 	{
-		var client = new MongoClient(settings.Value.ConnectionString);
-		_database = client.GetDatabase(settings.Value.DatabaseName);
+		// retrieve connection string and database name from the configuration
+		var connectionString = config.GetValue<string>("MongoDB:ConnectionString");
+		var databaseName = config.GetValue<string>("MongoDB:DatabaseName");
+
+		// create MongoDB client and connect to the specified database
+		var client = new MongoClient(connectionString);
+		_database = client.GetDatabase(databaseName);
 	}
 
+	// Generic method to retrieve a MongoDB collection by name
 	public IMongoCollection<T> GetCollection<T>(string name)
 	{
 		return _database.GetCollection<T>(name);
